@@ -5,23 +5,23 @@
   --font-serif: "Instrument Serif", serif;
   --font-sans: "Instrument Sans", sans-serif;
   
-  /* PALETTE FROM IMAGE */
-  --p-1: #F9F4F0; /* Cream */
-  --p-2: #FBE3C5; /* Light Peach */
-  --p-3: #F7C9A1; /* Muted Peach */
-  --p-4: #F5A97D; /* Soft Orange */
-  --p-5: #F2834E; /* Orange */
-  --p-6: #E85D3D; /* Vibrant Orange */
-  --p-7: #D64436; /* Soft Red */
-  --p-8: #BD2E3C; /* Red */
-  --p-9: #961E3F; /* Deep Red */
-  --p-10: #671434; /* Burgundy */
+  /* PALETTE FROM IMAGE - Prefixed with color- for Tailwind v4 compatibility */
+  --color-p-1: #F9F4F0; /* Cream */
+  --color-p-2: #FBE3C5; /* Light Peach */
+  --color-p-3: #F7C9A1; /* Muted Peach */
+  --color-p-4: #F5A97D; /* Soft Orange */
+  --color-p-5: #F2834E; /* Orange */
+  --color-p-6: #E85D3D; /* Vibrant Orange */
+  --color-p-7: #D64436; /* Soft Red */
+  --color-p-8: #BD2E3C; /* Red */
+  --color-p-9: #961E3F; /* Deep Red */
+  --color-p-10: #671434; /* Burgundy */
 
-  --color-accent: var(--p-6);
-  --color-accent-hover: var(--p-8);
+  --color-accent: var(--color-p-6);
+  --color-accent-hover: var(--color-p-8);
   --color-primary: #1A0D0B; /* Deep warm black/brown */
   --color-secondary: #5C4B48; /* Warm gray/brown */
-  --color-bg: var(--p-1);
+  --color-bg: var(--color-p-1);
   
   --breakpoint-xs: 480px;
 }
@@ -85,26 +85,26 @@
 }
 
 @utility section-padding {
-  @apply py-8 md:py-10;
+  @apply py-24 md:py-40;
 }
 
 @utility text-gradient {
-  @apply bg-clip-text text-transparent bg-linear-to-r from-p-10 via-p-8 to-p-6;
+  @apply bg-clip-text text-transparent bg-linear-to-r from-primary to-p-6;
 }
 
 @utility subtle-glow {
-  box-shadow: 0 0 40px -10px var(--p-3);
+  box-shadow: 0 0 40px -10px var(--color-p-3);
 }
 
 @utility premium-card {
   @apply bg-white border border-p-2/60 rounded-[2.5rem] transition-all duration-500;
   box-shadow: 
     0 10px 30px -15px rgba(103, 20, 52, 0.03),
-    0 0 20px -10px var(--p-2);
+    0 0 20px -10px var(--color-p-2);
 }
 
 @utility premium-card-hover {
-  @apply hover:border-p-4/40 hover:shadow-[0_20px_50px_-20px_rgba(103,20,52,0.1),0_0_30px_-5px_var(--p-3)] hover:-translate-y-1;
+  @apply hover:border-p-4/40 hover:shadow-[0_20px_50px_-20px_rgba(103,20,52,0.1),0_0_30px_-5px_var(--color-p-3)] hover:-translate-y-1;
 }
 
 @utility soft-shadow {
@@ -112,10 +112,10 @@
 }
 
 @utility accent-glow {
-  filter: drop-shadow(0 0 15px var(--p-4));
+  filter: drop-shadow(0 0 15px var(--color-p-4));
 }
 
-/* ─── Scroll Reveal (initial states — GSAP animates inline) ─── */
+/* ─── Scroll Reveal (initial states) ─── */
 .reveal,
 .hero-reveal {
   opacity: 0;
