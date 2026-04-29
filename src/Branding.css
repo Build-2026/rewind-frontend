@@ -1,0 +1,133 @@
+/* Custom branding for Rewind */
+.brand-name {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--p-6); /* VIBRANT ORANGE/RED */
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--p-6);
+}
+
+.rewind-badge {
+  background: var(--p-10); /* BURGUNDY */
+  color: var(--p-1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-glow {
+  transition: all 0.5s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 40px rgba(232, 93, 61, 0.15);
+}
+
+/* Sexy 2D Elements */
+.sexy-blob {
+  position: absolute;
+  filter: blur(80px);
+  z-index: 1; 
+  opacity: 0.4;
+  animation: float 20s infinite alternate;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.blob-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(232, 93, 61, 0.12), transparent);
+  top: -200px;
+  right: -100px;
+}
+
+.blob-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(150, 30, 63, 0.08), transparent);
+  bottom: 10%;
+  left: -100px;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(50px, 100px) rotate(180deg); }
+  100% { transform: translate(-50px, 50px) rotate(360deg); }
+}
+
+.sexy-dot-grid {
+  background-image: radial-gradient(rgba(103, 20, 52, 0.05) 1.2px, transparent 1.2px);
+  background-size: 64px 64px;
+  width: 100%;
+  height: 100%;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: -2; 
+  opacity: 1;
+  pointer-events: none;
+}
+
+.floating-label {
+  position: absolute;
+  background: var(--p-1);
+  padding: 8px 16px;
+  border-radius: 100px;
+  box-shadow: 0 10px 30px rgba(103, 20, 52, 0.08);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--p-8);
+  border: 1px solid rgba(150, 30, 63, 0.05);
+  z-index: 20;
+  animation: float-small 4s infinite ease-in-out;
+}
+
+@keyframes float-small {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Motion Blur Performance */
+h1, h2, h3, .text-xl, .text-2xl, .text-accent {
+  will-change: text-shadow;
+}
+
+@keyframes scroll-line {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+

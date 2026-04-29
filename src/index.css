@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-serif: "Instrument Serif", serif;
+  --font-sans: "Instrument Sans", sans-serif;
+  
+  /* PALETTE FROM IMAGE */
+  --p-1: #F9F4F0; /* Cream */
+  --p-2: #FBE3C5; /* Light Peach */
+  --p-3: #F7C9A1; /* Muted Peach */
+  --p-4: #F5A97D; /* Soft Orange */
+  --p-5: #F2834E; /* Orange */
+  --p-6: #E85D3D; /* Vibrant Orange */
+  --p-7: #D64436; /* Soft Red */
+  --p-8: #BD2E3C; /* Red */
+  --p-9: #961E3F; /* Deep Red */
+  --p-10: #671434; /* Burgundy */
+
+  --color-accent: var(--p-6);
+  --color-accent-hover: var(--p-8);
+  --color-primary: #1A0D0B; /* Deep warm black/brown */
+  --color-secondary: #5C4B48; /* Warm gray/brown */
+  --color-bg: var(--p-1);
+  
+  --breakpoint-xs: 480px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: initial;
+  }
+  
+  html, body {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  body {
+    @apply font-sans text-primary antialiased selection:bg-accent selection:text-white;
+    background-color: #ffffff;
+    position: relative;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 100;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-serif font-normal tracking-[-0.03em];
+  }
+  
+  p {
+    @apply font-sans leading-relaxed text-secondary;
+  }
+}
+
+@utility container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@utility btn-primary {
+  @apply bg-primary text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all hover:bg-accent hover:shadow-[0_0_20px_rgba(232,93,61,0.3)] active:scale-95;
+}
+
+@utility btn-hero {
+  @apply bg-primary text-white px-10 py-4 rounded-full text-lg font-medium transition-all hover:bg-accent hover:shadow-[0_0_30px_rgba(232,93,61,0.4)] active:scale-95;
+}
+
+@utility glass-card {
+  @apply bg-white/40 backdrop-blur-xl border border-white/20 rounded-[2rem] shadow-2xl;
+}
+
+@utility section-padding {
+  @apply py-8 md:py-10;
+}
+
+@utility text-gradient {
+  @apply bg-clip-text text-transparent bg-linear-to-r from-p-10 via-p-8 to-p-6;
+}
+
+@utility subtle-glow {
+  box-shadow: 0 0 40px -10px var(--p-3);
+}
+
+@utility premium-card {
+  @apply bg-white border border-p-2/60 rounded-[2.5rem] transition-all duration-500;
+  box-shadow: 
+    0 10px 30px -15px rgba(103, 20, 52, 0.03),
+    0 0 20px -10px var(--p-2);
+}
+
+@utility premium-card-hover {
+  @apply hover:border-p-4/40 hover:shadow-[0_20px_50px_-20px_rgba(103,20,52,0.1),0_0_30px_-5px_var(--p-3)] hover:-translate-y-1;
+}
+
+@utility soft-shadow {
+  box-shadow: 0 20px 40px -15px rgba(103, 20, 52, 0.08);
+}
+
+@utility accent-glow {
+  filter: drop-shadow(0 0 15px var(--p-4));
+}
+
+/* ─── Scroll Reveal (initial states — GSAP animates inline) ─── */
+.reveal,
+.hero-reveal {
+  opacity: 0;
+}
