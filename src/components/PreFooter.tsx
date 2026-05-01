@@ -1,11 +1,10 @@
 import React from 'react';
 
 const PreFooter: React.FC = () => {
-  // 🎨 Palette: Peach -> White -> Lavender
   const columns = [
-    '#E3BABA', '#E9C3C3', '#F0CCCC', '#F6D5D5', '#FCEEEE',
-    '#FFFFFF',
-    '#F1F1F5', '#E3E3EB', '#D5D5E1', '#C7C7D7', '#B9B9CD', '#ABAAC3', '#9D9DB9', '#8F8FAF', '#8181A5'
+    '#F2FAFF', '#DFF3FC', '#C6E8F8', '#A5D8F1', '#7FC4EA',
+    '#76BDE6', '#6EB4E1', '#5998D2', '#4789C9', '#3979BF',
+    '#2D69B5', '#2059AA', '#174B9F', '#0D3F94', '#092F76'
   ];
 
   return (
@@ -20,27 +19,29 @@ const PreFooter: React.FC = () => {
           />
         ))}
       </div>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.78)_0%,rgba(242,250,255,0.5)_52%,rgba(255,255,255,0.16)_100%)] pointer-events-none" />
       
       {/* Texture Overlay */}
       <div className="absolute inset-0 opacity-[0.08] mix-blend-overlay pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
+      {/* Animated light sweep */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-0 w-[200px] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" style={{ animation: 'shimmer-slide 8s ease-in-out infinite' }} />
+      </div>
+
       <div className="container relative z-10">
         <div className="max-w-2xl reveal text-left">
-          <h2 className="text-3xl md:text-[2.85rem] font-serif font-normal text-black mb-3 tracking-tight leading-[1.1]">
-            Meeting AI that helps during the call, not after.
+          <h2 className="text-4xl md:text-[3.25rem] font-serif font-normal text-primary mb-12 tracking-tighter leading-[1]">
+            Experience meeting AI <br />
+            <span className="italic text-accent">without a trace.</span>
           </h2>
-          
-          <div className="mb-6">
-            <p className="text-lg md:text-[1.35rem] font-sans font-medium text-black/50 tracking-tight leading-relaxed">
-              Try Rewind on your next meeting today.
-            </p>
-          </div>
+
           
           {/* 🚀 Premium Black CTA with Prominent Border & Hover */}
-          <button className="group relative flex items-center justify-center gap-2.5 px-5 h-[46px] rounded-xl font-sans font-medium text-[15px] text-[#F5F5F5] transition-all duration-[250ms] ease-out hover:scale-[1.03] hover:-translate-y-[0.5px] active:scale-[0.98] cursor-pointer shadow-[0_15px_30px_-10px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] antialiased w-fit">
+          <button className="btn-shimmer group relative flex items-center justify-center gap-2.5 px-5 h-[46px] rounded-xl font-sans font-medium text-[15px] text-[#F5F5F5] transition-all duration-[250ms] ease-out hover:scale-[1.03] hover:-translate-y-[0.5px] active:scale-[0.98] cursor-pointer shadow-[0_16px_36px_-16px_rgba(9,47,118,0.5)] hover:shadow-[0_22px_48px_-18px_rgba(9,47,118,0.6)] antialiased w-fit">
             {/* Base Layer & Main Black Gradient */}
-            <div className="absolute inset-0 bg-[#000000] rounded-xl overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-2px_6px_rgba(0,0,0,0.4)]">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#333333] to-[#000000] opacity-100 transition-all duration-[250ms] ease-out group-hover:from-[#444444] group-hover:to-[#050505]" />
+            <div className="absolute inset-0 bg-p-10 rounded-xl overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),inset_0_-2px_8px_rgba(3,26,72,0.5)]">
+              <div className="absolute inset-0 bg-gradient-to-br from-p-4 via-p-5 to-p-7 opacity-100 transition-all duration-[250ms] ease-out group-hover:from-p-3 group-hover:to-p-6" />
               {/* More prominent radial glow on hover */}
               <div className="absolute top-0 left-0 w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.35)_0%,transparent_60%)] opacity-0 transition-opacity duration-[250ms] ease-out group-hover:opacity-100" />
             </div>

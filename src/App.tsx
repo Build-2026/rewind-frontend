@@ -10,6 +10,8 @@ import FAQ from './components/FAQ';
 import PreFooter from './components/PreFooter';
 import Footer from './components/Footer';
 
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 const App: React.FC = () => {
@@ -49,31 +51,23 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative" ref={mainRef}>
+    <div className="min-h-screen flex flex-col relative bg-[#F5F2EB]" ref={mainRef}>
       <Navbar />
-      <main className="flex-grow relative z-10">
-        <Hero />
-        <Difference />
+      <main className="flex-grow relative z-10">        <Hero />
         <UndetectableShowcase />
+        <Difference />
         <Undetectable />
+
         <FAQ />
         <PreFooter />
       </main>
       <Footer />
 
-      {/* Clean Accent Border & Corner Glows */}
-      <div className="fixed inset-0 border-[1px] border-accent/10 pointer-events-none z-[200]">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 blur-[100px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 blur-[100px] rounded-full" />
+      {/* Subtle Corner Ambient Glows */}
+      <div className="fixed inset-0 pointer-events-none z-[200]">
+        <div className="absolute top-0 right-0 w-72 h-72 bg-accent/4 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/4 blur-[120px] rounded-full" />
       </div>
-
-      {/* SVG Displacement Filter */}
-      <svg style={{ position: 'fixed', width: 0, height: 0, pointerEvents: 'none' }}>
-        <filter id="displacementFilter">
-          <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </svg>
     </div>
   );
 };

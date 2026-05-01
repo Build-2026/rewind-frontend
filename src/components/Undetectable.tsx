@@ -85,14 +85,15 @@ const Undetectable: React.FC = () => {
   return (
     <section id="features-carousel" className="section-padding bg-white relative overflow-hidden">
       {/* Background Decorative Element */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,rgba(232,93,61,0.04)_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute inset-x-0 top-1/3 h-1/2 bg-[linear-gradient(90deg,transparent_0%,rgba(127,196,234,0.16)_24%,rgba(57,121,191,0.1)_60%,transparent_100%)] blur-3xl pointer-events-none" />
+
+      {/* Ambient floating orb */}
+      <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] bg-gradient-to-tl from-indigo-100/40 to-transparent rounded-full blur-[80px] pointer-events-none" style={{ animation: 'aurora-drift-alt 22s ease-in-out infinite' }} />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="max-w-4xl mb-8 reveal">
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-6 block">Capabilities</span>
-          <h2 className="text-6xl md:text-7xl font-serif text-primary leading-[1.05] tracking-tight">
-            The power to <br />
-            <span className="italic text-accent">perform</span> under pressure.
+        <div className="max-w-4xl mb-12 reveal text-left">
+          <h2 className="text-4xl md:text-6xl font-serif text-[#3E4759] leading-[1.2] tracking-tight">
+            The power to perform under pressure
           </h2>
         </div>
         
@@ -113,27 +114,32 @@ const Undetectable: React.FC = () => {
               <div 
                 key={feature.id}
                 data-index={idx}
-                className="carousel-card w-[85%] md:w-[70%] shrink-0 snap-start aspect-[16/9] relative rounded-[3rem] overflow-hidden bg-[#0A0A0A] border border-white/10 group transition-all duration-700 hover:border-p-4/30"
+                className="carousel-card w-[85%] md:w-[70%] shrink-0 snap-start aspect-[16/9] relative rounded-[2rem] overflow-hidden bg-p-10 border border-p-2/10 group transition-all duration-700 hover:border-p-3/45"
               >
                 {/* Decorative Light Effect */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_0%,rgba(232,93,61,0.25)_0%,transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(130deg,rgba(127,196,234,0.28)_0%,transparent_48%,rgba(13,63,148,0.24)_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(3,26,72,0.84)_100%)]" />
+
+                {/* Card number indicator */}
+                <div className="absolute top-8 right-10 text-white/10 font-serif text-[6rem] leading-none select-none transition-all duration-700 group-hover:text-white/15 group-hover:scale-105">
+                  {String(idx + 1).padStart(2, '0')}
+                </div>
 
                 {/* Content */}
                 <div className="absolute inset-0 p-12 md:p-20 flex flex-col justify-end">
                   <div className="max-w-xl transition-transform duration-700 group-hover:-translate-y-4">
-                    <h3 className="text-4xl md:text-6xl font-serif text-white mb-6 whitespace-pre-line leading-[1.1]">
+                    <h3 className="text-4xl md:text-6xl font-serif text-white mb-6 whitespace-pre-line leading-[1.1] tracking-tight">
                       {feature.titleInCard}
                     </h3>
-                    <p className="text-neutral-400 text-lg md:text-xl font-medium max-w-sm leading-relaxed">
+                    <p className="text-p-2/75 text-lg md:text-xl font-medium max-w-sm leading-relaxed">
                       {feature.randomText}
                     </p>
                   </div>
                 </div>
 
                 {/* Subtle Border Glow */}
-                <div className="absolute inset-0 rounded-[3rem] border border-white/5 pointer-events-none group-hover:border-p-4/10 transition-colors duration-700" />
-                <div className="absolute inset-0 rounded-[3rem] shadow-[0_0_40px_-10px_rgba(232,93,61,0.1)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="absolute inset-0 rounded-[2rem] border border-white/5 pointer-events-none group-hover:border-p-3/20 transition-colors duration-700" />
+                <div className="absolute inset-0 rounded-[2rem] shadow-[0_0_46px_-14px_rgba(127,196,234,0.28)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               </div>
             ))}
             <div className="w-[10%] md:w-[15%] shrink-0" aria-hidden="true" />
@@ -143,15 +149,26 @@ const Undetectable: React.FC = () => {
         {/* Info & Controls */}
         <div className="mt-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 reveal">
           <div className="max-w-2xl">
-            <h4 className="text-3xl font-serif text-primary mb-6">
+            <h4 className="text-3xl font-serif text-[#3E4759] mb-2 tracking-tight">
               {features[currentIndex].title}
             </h4>
-            <p className="text-secondary text-xl leading-relaxed font-medium">
-              {features[currentIndex].description}
-            </p>
+            {/* Progress dots */}
+            <div className="flex gap-2 mt-4">
+              {features.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollTo(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    idx === currentIndex 
+                      ? 'w-8 bg-accent' 
+                      : 'w-1.5 bg-accent/20 hover:bg-accent/40'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
           
-          <div className="flex bg-p-2/40 p-2 rounded-full gap-2 shrink-0 border border-p-3/30">
+          <div className="flex bg-p-2/16 p-2 rounded-full gap-2 shrink-0 border border-p-3/25 shadow-[0_18px_46px_-30px_rgba(9,47,118,0.24)]">
             <button 
               onClick={prev}
               disabled={currentIndex === 0}
@@ -168,6 +185,7 @@ const Undetectable: React.FC = () => {
             </button>
           </div>
         </div>
+
 
       </div>
     </section>

@@ -1,25 +1,110 @@
 /* Custom branding for Rewind */
 .brand-name {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
-  letter-spacing: -0.02em;
-  color: #000000;
+  font-style: italic;
+  letter-spacing: 0;
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
+@property --sheen-opacity {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes accent-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.hero-title {
+  font-style: italic;
+  font-weight: 500;
+  color: #000000;
+  --sheen-opacity: 0;
+  background: 
+    radial-gradient(
+      circle 150px at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 255, var(--sheen-opacity)) 0%,
+      rgba(89, 152, 210, calc(var(--sheen-opacity) * 0.4)) 40%,
+      transparent 80%
+    ),
+    linear-gradient(105deg, #000000 0%, #000000 40%, var(--color-p-8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: --sheen-opacity 0.6s ease;
+  padding-right: 0.05em;
+}
+
+.hero-title:hover {
+  --sheen-opacity: 0.95;
+}
+
+.hero-title-accent {
+  font-style: italic;
+  font-weight: 500;
+  color: #000000;
+  background: 
+    radial-gradient(
+      circle 120px at var(--ax, 50%) var(--ay, 50%),
+      rgba(255, 255, 255, var(--sheen-opacity)) 0%,
+      rgba(147, 197, 253, calc(var(--sheen-opacity) * 0.9)) 30%,
+      transparent 70%
+    ),
+    linear-gradient(
+      90deg, 
+      transparent 0%, 
+      rgba(30, 64, 175, 0) 20%, 
+      rgba(147, 197, 253, 0.4) 40%, 
+      rgba(255, 255, 255, 0.6) 50%, 
+      rgba(147, 197, 253, 0.4) 60%, 
+      rgba(30, 64, 175, 0) 80%, 
+      transparent 100%
+    ),
+    linear-gradient(115deg, #1E40AF 0%, #3B82F6 50%, #93C5FD 100%);
+  background-size: 100% 100%, 200% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  animation: accent-shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: --sheen-opacity 0.6s ease;
+  padding: 0 0.15em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .brand-dot {
   width: 10px;
   height: 10px;
-  background-color: var(--p-6); /* VIBRANT ORANGE/RED */
+  background-color: var(--color-accent);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--p-6);
+  box-shadow: 0 0 14px rgba(57, 121, 191, 0.65);
 }
 
 .rewind-badge {
-  background: var(--p-10); /* BURGUNDY */
-  color: var(--p-1);
+  background: var(--color-p-10);
+  color: var(--color-p-1);
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 10px;
@@ -43,45 +128,11 @@
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 40px rgba(232, 93, 61, 0.15);
-}
-
-/* Sexy 2D Elements */
-.sexy-blob {
-  position: absolute;
-  filter: blur(80px);
-  z-index: 1; 
-  opacity: 0.4;
-  animation: float 20s infinite alternate;
-  will-change: transform;
-  pointer-events: none;
-}
-
-.blob-1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(232, 93, 61, 0.12), transparent);
-  top: -200px;
-  right: -100px;
-}
-
-.blob-2 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(150, 30, 63, 0.08), transparent);
-  bottom: 10%;
-  left: -100px;
-  animation-delay: -5s;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(50px, 100px) rotate(180deg); }
-  100% { transform: translate(-50px, 50px) rotate(360deg); }
+  box-shadow: 0 0 42px rgba(57, 121, 191, 0.18);
 }
 
 .sexy-dot-grid {
-  background-image: radial-gradient(rgba(103, 20, 52, 0.05) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(rgba(13, 63, 148, 0.08) 1.2px, transparent 1.2px);
   background-size: 64px 64px;
   width: 100%;
   height: 100%;
@@ -95,16 +146,16 @@
 
 .floating-label {
   position: absolute;
-  background: var(--p-1);
+  background: rgba(242, 250, 255, 0.86);
   padding: 8px 16px;
   border-radius: 100px;
-  box-shadow: 0 10px 30px rgba(103, 20, 52, 0.08);
+  box-shadow: 0 12px 32px rgba(9, 47, 118, 0.14);
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--p-8);
-  border: 1px solid rgba(150, 30, 63, 0.05);
+  color: var(--color-p-8);
+  border: 1px solid rgba(127, 196, 234, 0.2);
   z-index: 20;
   animation: float-small 4s infinite ease-in-out;
 }
@@ -129,5 +180,3 @@ h1, h2, h3, .text-xl, .text-2xl, .text-accent {
   0% { transform: translateX(-100%) skewX(-15deg); }
   100% { transform: translateX(200%) skewX(-15deg); }
 }
-
-

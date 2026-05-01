@@ -1,166 +1,222 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { AudioLines, Sparkles } from 'lucide-react';
+
+const HeadingPill: React.FC<{ children: React.ReactNode, variant?: 'blue' | 'grey', icon?: React.ReactNode }> = ({ children, variant = 'blue', icon }) => {
+  const bgColor = variant === 'blue' ? 'bg-[#7C9EF7]' : 'bg-[#E6E8EB]';
+  const textColor = variant === 'blue' ? 'text-white' : 'text-[#3E4759]';
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${bgColor} ${textColor} font-bold text-[14px] shadow-sm mx-1 transition-transform duration-300 hover:scale-105`}>
+      {icon}
+      {children}
+    </span>
+  );
+};
 
 const UndetectableShowcase: React.FC = () => {
   const [sliderPos, setSliderPos] = useState(50);
 
+  const handleSliderMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pos = Math.min(Math.max(((e.clientX - rect.left) / rect.width) * 100, 2), 98);
+    setSliderPos(pos);
+  }, []);
+
+  // Shared code lines for both sides
+  const codeLines = [
+    { num: '1', code: <span className="text-neutral-400">{"// Fetch data from API and display results"}</span> },
+    { num: '2', code: <span>&nbsp;</span> },
+    { num: '3', code: <><span className="text-[#D339A3]">import</span> axios <span className="text-[#D339A3]">from</span> <span className="text-[#008E5D]">'axios'</span>;</> },
+    { num: '4', code: <span>&nbsp;</span> },
+    { num: '5', code: <><span className="text-[#0070E0]">async function</span> <span className="text-[#6F42C1]">fetchUserData</span>(userId) {"{"}</> },
+    { num: '6', code: <span className="pl-4">{"try {"}</span> },
+    { num: '7', code: <span>&nbsp;</span> },
+    { num: '8', code: <span>&nbsp;</span> },
+    { num: '9', code: <span>&nbsp;</span> },
+    { num: '10', code: <span>&nbsp;</span> },
+  ];
+
   return (
-    <section className="section-padding bg-white">
-      <div className="container">
-        <div className="text-center mb-8 reveal">
-          <h2 className="text-5xl md:text-7xl font-serif text-primary mb-6 tracking-tight">
-            Undetectable in every way
+    <section className="section-padding bg-white relative overflow-hidden">
+      {/* Subtle dot grid pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #3979BF 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+      
+      {/* Ambient glow */}
+      <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-blue-100/30 via-sky-100/20 to-indigo-100/30 rounded-full blur-[100px] pointer-events-none" style={{ animation: 'aurora-drift 18s ease-in-out infinite' }} />
+
+      <div className="container relative z-10">
+        <div className="text-left mb-16 reveal">
+          <h2 className="text-3xl md:text-[2.75rem] font-sans font-bold text-[#3E4759] mb-6 tracking-tight leading-[1.2]">
+            How Rewine helps during a meeting
           </h2>
-          <p className="text-xl text-secondary max-w-2xl mx-auto font-medium">
-            Suite of features to use Rewind without a trace.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 reveal">
-          <div className="flex flex-col gap-8">
-            <div className="aspect-[4/5] rounded-[2.5rem] bg-[#F7C9A1]/15 p-8 flex flex-col relative overflow-hidden border border-p-3/20 shadow-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(247,201,161,0.2)]">
-              <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/60 flex-grow">
-                <div className="flex justify-between items-center mb-6">
-                  <h4 className="text-sm font-bold text-primary opacity-80 uppercase tracking-wider">Meeting participants (4)</h4>
-                  <div className="flex items-center gap-1.5 px-3 py-1 bg-green-50 rounded-full border border-green-100">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                    <span className="text-[10px] font-bold text-green-600 uppercase">No bots detected</span>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  {[
-                    { name: "Gina Huels", email: "ginahue65@cluely.com", role: "Owner" },
-                    { name: "Todd Cremin", email: "todd.cremin@cluely.com", role: "Speaker" },
-                    { name: "Holly Gleason", email: "holly_gleaso1972@cluely.com", role: "Speaker" },
-                    { name: "Tomas Hansen", email: "tomas_hansen@cluely.com", role: "Speaker" }
-                  ].map((user, i) => (
-                    <div key={i} className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-neutral-200 border border-black/5" />
-                        <div>
-                          <p className="text-sm font-bold text-primary">{user.name}</p>
-                          <p className="text-[10px] text-neutral-400 font-medium">{user.email}</p>
+
+          {/* ═══ Card 1: Cluely-style Before/After ═══ */}
+          <div className="relative aspect-[4/5] rounded-[3.5rem] overflow-visible transform-gpu backface-hidden group/card">
+            {/* Blue glow behind frosted glass */}
+            <div className="absolute inset-10 bg-[#4A7AFF] blur-[70px] opacity-60 transform-gpu transition-opacity duration-700 group-hover/card:opacity-75" />
+
+            {/* Frosted outer frame */}
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl rounded-[3.5rem] border border-white/40 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden transform-gpu backface-hidden transition-all duration-700 group-hover/card:shadow-[0_40px_80px_-20px_rgba(74,122,255,0.2)]">
+              <div className="absolute inset-0 p-6">
+                {/* Inner blue card */}
+                <div className="bg-[#E8EDFB] rounded-[2rem] h-full w-full shadow-2xl relative overflow-hidden transform-gpu backface-hidden">
+
+                  {/* ── RIGHT SIDE (base): "Invisible to others" ── */}
+                  <div className="absolute inset-0 flex flex-col">
+                    {/* Cluely-style Heading */}
+                    <div className="p-8 pb-0">
+                      <h3 className="text-[22px] font-sans font-bold text-[#3E4759] leading-[1.3] max-w-[240px]">
+                        Rewine
+                        <HeadingPill variant="blue" icon={<AudioLines size={14} />}>listens</HeadingPill>
+                        in to the conversation
+                      </h3>
+                    </div>
+                    {/* Label */}
+                    <div className="flex justify-end p-5">
+                      <span className="text-neutral-500 text-[11px] font-semibold tracking-wide">Invisible to others</span>
+                    </div>
+                    {/* Mac window — plain code, no AI overlay */}
+                    <div className="flex-1 px-5 pb-5">
+                      <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col border border-neutral-200/60">
+                        <div className="h-7 bg-[#F5F5F7] flex items-center px-3 gap-1.5 border-b border-neutral-100 shrink-0">
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
+                          <div className="ml-auto flex items-center gap-2">
+                            <span className="text-[9px] text-neutral-300">←</span>
+                            <span className="text-[9px] text-neutral-300">→</span>
+                            <div className="bg-neutral-100 rounded px-2 py-0.5 text-[8px] text-neutral-400">🔍 fetchUserData</div>
+                          </div>
+                        </div>
+                        <div className="p-4 font-mono text-[9px] leading-[1.8] text-neutral-800 flex-1 overflow-hidden">
+                          {codeLines.map((line, i) => (
+                            <div key={i} className="flex">
+                              <span className="w-6 text-right mr-4 text-neutral-300 select-none">{line.num}</span>
+                              <span>{line.code}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">{user.role}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* Bottom UI Bar */}
-              <div className="mt-6 flex justify-between items-center px-2">
-                <div className="flex items-center gap-2 opacity-30">
-                   <div className="w-6 h-6 rounded-full bg-primary" />
-                   <div className="text-[10px] font-bold uppercase tracking-widest">Rewind</div>
-                </div>
-                <div className="opacity-30">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.956 9.956 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p className="text-lg text-secondary leading-relaxed">
-                <span className="text-primary font-bold">Doesn't join meetings.</span> Rewind never joins your meetings, so there are no bots and no extra people on the guest list.
-              </p>
-            </div>
-          </div>
-
-          {/* Card 2: Invisible to screen share (Slider) */}
-          <div className="flex flex-col gap-8">
-            <div className="aspect-[4/5] rounded-[2.5rem] bg-[#FBE3C5]/20 p-4 flex flex-col relative overflow-hidden border border-p-2/20 shadow-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(251,227,197,0.3)]">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-white border border-black/[0.03]">
-                {/* Left Side (Visible to you) */}
-                <div className="absolute inset-0 z-10 flex flex-col p-6 pointer-events-none" style={{ width: `${sliderPos}%`, overflow: 'hidden' }}>
-                  <div className="min-w-[320px]">
-                    <div className="bg-[#52525B] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-lg w-fit mb-4">Visible to you</div>
-                    <div className="bg-white rounded-xl p-4 shadow-lg border border-black/5 w-full">
-                       <div className="flex items-center gap-2 mb-4">
-                          <div className="w-2.5 h-2.5 bg-accent rounded-full" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest">AI Response</span>
-                       </div>
-                       <div className="h-2 w-full bg-neutral-100 rounded-full mb-2" />
-                       <div className="h-2 w-2/3 bg-neutral-100 rounded-full mb-2" />
-                       <div className="h-2 w-3/4 bg-neutral-100 rounded-full" />
                     </div>
                   </div>
-                </div>
 
-                {/* Right Side (Invisible to others) */}
-                <div className="absolute inset-0 z-0 flex flex-col items-end p-6 bg-neutral-50">
-                  <div className="bg-[#52525B] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-lg w-fit mb-4">Invisible to others</div>
-                  {/* Blurred/Empty state */}
-                  <div className="w-[80%] h-32 bg-white rounded-xl border border-black/5 p-4 flex flex-col gap-2">
-                    <div className="h-2 w-full bg-neutral-50 rounded-full" />
-                    <div className="h-2 w-2/3 bg-neutral-50 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Slider Handle */}
-                <div 
-                  className="absolute inset-0 z-20 cursor-ew-resize"
-                  onMouseMove={(e) => {
-                    if (e.buttons === 1) {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = ((e.clientX - rect.left) / rect.width) * 100;
-                      setSliderPos(Math.max(0, Math.min(100, x)));
-                    }
-                  }}
-                  onMouseDown={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    setSliderPos(Math.max(0, Math.min(100, x)));
-                  }}
-                >
-                  <div 
-                    className="absolute top-0 bottom-0 w-0.5 bg-neutral-400 pointer-events-none"
-                    style={{ left: `${sliderPos}%` }}
+                  {/* ── LEFT SIDE (overlay): "Visible to you" — clips with slider ── */}
+                  <div
+                    className="absolute inset-0 z-20 overflow-hidden transform-gpu backface-hidden"
+                    style={{ width: `${sliderPos}%` }}
                   >
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#18181B] flex items-center justify-center text-white shadow-xl">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" transform="rotate(90 10 10)" /></svg>
+                    <div className="absolute inset-0 min-w-[300px]">
+                      {/* Label */}
+                      <div className="absolute top-5 left-5">
+                        <span className="text-[#4A7AFF] text-[11px] font-bold tracking-wide bg-white rounded-md px-3 py-1 shadow-sm border border-blue-100">Visible to you</span>
+                      </div>
+
+                      {/* AI Response bubble — floats above the code window */}
+                      <div className="absolute top-[48px] left-5 right-5 bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-3 border border-neutral-100 z-20">
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className="text-cyan-500 text-sm">✦</span>
+                          <span className="font-bold text-[10px] text-neutral-800">AI Response</span>
+                        </div>
+                        <p className="text-[9px] text-neutral-500 leading-relaxed">
+                          Add a check for missing <span className="bg-blue-50 text-blue-600 px-1 rounded text-[8px] font-mono">userId</span>.
+                          Also handle <span className="bg-blue-50 text-blue-600 px-1 rounded text-[8px] font-mono">data.name</span> safely.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ── SLIDER ── */}
+                  <div
+                    className="absolute inset-0 z-30 cursor-ew-resize select-none"
+                    onMouseMove={(e) => { if (e.buttons === 1) handleSliderMove(e); }}
+                    onMouseDown={handleSliderMove}
+                  >
+                    {/* Vertical line */}
+                    <div className="absolute top-0 bottom-0 w-[1px] bg-neutral-400/50" style={{ left: `${sliderPos}%` }}>
+                      {/* Handle */}
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#1A1A1A] shadow-xl flex items-center justify-center cursor-ew-resize hover:scale-110 transition-transform">
+                        <span className="text-white text-[10px] font-bold select-none">&lt; &gt;</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* ═══ Card 2: Participants ═══ */}
+          <div className="relative aspect-[4/5] rounded-[3.5rem] overflow-visible transform-gpu backface-hidden group/card2">
+            <div className="absolute inset-10 bg-[#4A7AFF] blur-[70px] opacity-60 transform-gpu transition-opacity duration-700 group-hover/card2:opacity-75" />
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl rounded-[3.5rem] border border-white/40 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden transform-gpu backface-hidden transition-all duration-700 group-hover/card2:shadow-[0_40px_80px_-20px_rgba(74,122,255,0.2)]">
+              <div className="absolute inset-0 p-8">
+                <div className="bg-white rounded-[2.5rem] h-full w-full shadow-[0_20px_50px_rgba(74,122,255,0.15)] relative overflow-hidden p-10 flex flex-col transform-gpu backface-hidden">
+                  <div className="mb-8">
+                    <h3 className="text-[22px] font-sans font-bold text-[#3E4759] leading-[1.3]">
+                      When you need help, Rewine
+                      <HeadingPill variant="grey" icon={<Sparkles size={14} />}>assists</HeadingPill>
+                      you instantly
+                    </h3>
+                  </div>
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="text-[10px] font-bold text-white opacity-40 uppercase tracking-[0.2em] leading-relaxed">
+                      Real-time <br /> Participants
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-white/20">Verified</div>
+                  </div>
+                  <div className="space-y-6">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="flex items-center gap-4 opacity-10">
+                        <div className="w-10 h-10 rounded-full bg-white" />
+                        <div className="h-2 w-32 bg-white rounded-full" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-auto flex flex-col items-center gap-6">
+                    <div className="bg-white shadow-xl px-6 py-3 rounded-full flex items-center gap-3 w-fit transition-all duration-500 hover:shadow-[0_8px_30px_rgba(74,122,255,0.25)] hover:scale-105">
+                      <div className="w-2.5 h-2.5 bg-[#4A7AFF] rounded-full animate-pulse" />
+                      <span className="text-[10px] font-bold text-[#4A7AFF] uppercase tracking-widest">Stealth Tech</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-              <p className="text-lg text-secondary leading-relaxed">
-                <span className="text-primary font-bold">Invisible to screen share.</span> Rewind never shows up in shared screens, recordings, or external meeting tools.
-              </p>
+          </div>
+
+          {/* ═══ Card 3: Shortcuts ═══ */}
+          <div className="relative aspect-[4/5] rounded-[3.5rem] bg-[#1A1A1A] overflow-hidden transform-gpu backface-hidden group/card3">
+            {/* Ambient light effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-indigo-900/10 opacity-0 group-hover/card3:opacity-100 transition-opacity duration-1000" />
+            
+            <div className="absolute inset-0 p-10 flex flex-col items-center justify-center gap-12">
+              <div className="flex gap-6">
+                <div className="w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-white text-3xl font-serif backdrop-blur-md transition-all duration-500 group-hover/card3:border-white/20 group-hover/card3:bg-white/10 group-hover/card3:shadow-[0_0_30px_rgba(74,122,255,0.15)]">⌘</div>
+                <div className="w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-white text-3xl font-serif backdrop-blur-md transition-all duration-500 group-hover/card3:border-white/20 group-hover/card3:bg-white/10 group-hover/card3:shadow-[0_0_30px_rgba(74,122,255,0.15)]">K</div>
+              </div>
+              <div className="w-full max-w-[240px] h-1.5 bg-white/10 rounded-full overflow-hidden">
+                <div className="h-full w-1/3 bg-[#4A7AFF] shadow-[0_0_15px_rgba(74,122,255,0.8)] rounded-full transition-all duration-1000 group-hover/card3:w-2/3" />
+              </div>
+              <p className="text-white/30 text-[11px] font-medium tracking-wider uppercase opacity-0 group-hover/card3:opacity-100 transition-all duration-700 translate-y-2 group-hover/card3:translate-y-0">Instant access with shortcuts</p>
             </div>
           </div>
 
-          {/* Card 3: Follows your eyes (Shortcuts) */}
-          <div className="flex flex-col gap-8">
-            <div className="aspect-[4/5] rounded-[2.5rem] bg-[#F5A97D]/10 p-8 flex flex-col items-center justify-center relative overflow-hidden border border-p-4/15 shadow-sm transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,169,125,0.15)]">
-               {/* Shortcuts UI */}
-               <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 shadow-2xl border border-white/60 flex flex-col items-center gap-8">
-                 <div className="flex items-center gap-4">
-                   <div className="w-20 h-20 rounded-2xl bg-white shadow-lg border border-black/5 flex flex-col items-center justify-center gap-1">
-                     <span className="text-xl">⌘</span>
-                     <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400">command</span>
-                   </div>
-                   <span className="text-2xl text-neutral-300">+</span>
-                   <div className="flex flex-wrap gap-2 w-32">
-                     <div className="w-10 h-10 rounded-lg bg-white shadow-md border border-black/5 flex items-center justify-center">↑</div>
-                     <div className="w-10 h-10 rounded-lg bg-white shadow-md border border-black/5 flex items-center justify-center">↓</div>
-                     <div className="w-10 h-10 rounded-lg bg-white shadow-md border border-black/5 flex items-center justify-center">←</div>
-                     <div className="w-10 h-10 rounded-lg bg-white shadow-md border border-black/5 flex items-center justify-center">→</div>
-                   </div>
-                 </div>
-                 
-                 <div className="w-full h-1 bg-neutral-100 rounded-full relative">
-                   <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-4 h-4 rounded-full bg-accent border-4 border-white shadow-md" />
-                 </div>
-               </div>
+        </div>
 
-               {/* Background Decorative Circles */}
-               <div className="absolute top-[-20%] right-[-20%] w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
-            </div>
-            <div>
-              <p className="text-lg text-secondary leading-relaxed">
-                <span className="text-primary font-bold">Follows your eyes.</span> Rewind window is fully moveable so you can position it exactly where you're looking.
-              </p>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 px-4 text-left">
+          <div className="group/desc">
+            <h3 className="text-2xl font-sans font-bold text-[#3E4759] mb-2 tracking-tight transition-colors duration-300 group-hover/desc:text-accent">Invisible to screen share</h3>
+            <p className="text-secondary text-base opacity-60">Rewine never appears in shared screens or recordings.</p>
+          </div>
+          <div className="group/desc">
+            <h3 className="text-2xl font-sans font-bold text-[#3E4759] mb-2 tracking-tight transition-colors duration-300 group-hover/desc:text-accent">Doesn't join meetings</h3>
+            <p className="text-secondary text-base opacity-60">No bots, no extra people on the guest list.</p>
+          </div>
+          <div className="group/desc">
+            <h3 className="text-2xl font-sans font-bold text-[#3E4759] mb-2 tracking-tight transition-colors duration-300 group-hover/desc:text-accent">Follows your eyes</h3>
+            <p className="text-secondary text-base opacity-60">Move the window exactly where you need it.</p>
           </div>
         </div>
       </div>
